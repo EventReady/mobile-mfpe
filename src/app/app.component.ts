@@ -98,6 +98,7 @@ export class AppComponent {
 			this.splashScreen.hide();
 			if (this.platform.is('cordova')) {
 				this.startGoogleAnalytics();
+				this.startOneSignal();
 			}
 		});
 	}

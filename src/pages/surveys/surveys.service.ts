@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { eventUrl, serverToken, eventId, clientId, database } from '@app/globals';
+import {
+	eventUrl,
+	serverToken,
+	eventId,
+	clientId,
+	database,
+} from '@app/globals';
 
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
@@ -39,13 +45,14 @@ export class SurveysService {
 	**-------------------------------------------------------------------------------------
 	*/
 	getSurveyAnswer(surveyId: number, regId) {
+		let body: string = JSON.stringify({
+			clientId,
+			eventId,
+			surveyId,
+			regId,
+		});
 		return this.http
-			.get(
-				`${eventUrl}.survey-answer&clientId=${clientId}&eventId=${eventId}&surveyId=${surveyId}&item=${btoa(
-					regId,
-				)}`,
-				this.options,
-			)
+			.post(`${eventUrl}.survey-answer`, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}
@@ -55,13 +62,15 @@ export class SurveysService {
 	**-------------------------------------------------------------------------------------
 	*/
 	saveAnswer(regId, surveyId, answer) {
+		let body: string = JSON.stringify({
+			clientId,
+			eventId,
+			answer,
+			surveyId,
+			regId,
+		});
 		return this.http
-			.get(
-				`${eventUrl}.save-answer&clientId=${clientId}&eventId=${eventId}&answer=${answer}&surveyId=${surveyId}&item=${btoa(
-					regId,
-				)}`,
-				this.options,
-			)
+			.post(`${eventUrl}.save-answer`, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}
@@ -71,13 +80,15 @@ export class SurveysService {
 	**-------------------------------------------------------------------------------------
 	*/
 	addAnswer(regId, surveyId, answer) {
+		let body: string = JSON.stringify({
+			clientId,
+			eventId,
+			answer,
+			surveyId,
+			regId,
+		});
 		return this.http
-			.get(
-				`${eventUrl}.add-answer&clientId=${clientId}&eventId=${eventId}&answer=${answer}&surveyId=${surveyId}&item=${btoa(
-					regId,
-				)}`,
-				this.options,
-			)
+			.post(`${eventUrl}.add-answer`, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}

@@ -43,7 +43,7 @@ export class AuthService {
 			eventId: eventId,
 		});
 		return this.http
-			.post(`${eventUrl}.forget-password`, body, this.options)
+			.post(`${eventUrl}.forget-password`, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}
@@ -59,7 +59,11 @@ export class AuthService {
 			eventId: eventId,
 		});
 		return this.http
-			.post(`${eventUrl}.forget-speaker-password`, body, this.options)
+			.post(
+				`${eventUrl}.forget-speaker-password`,
+				btoa(body),
+				this.options,
+			)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}
@@ -97,8 +101,9 @@ export class AuthService {
 			clientId: clientId,
 			eventId: eventId,
 		});
+		this.options.headers['foo'] = body;
 		return this.http
-			.post(this.url, body, this.options)
+			.post(this.url, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}
@@ -115,7 +120,7 @@ export class AuthService {
 			eventId: eventId,
 		});
 		return this.http
-			.post(`${eventUrl}.process-speaker-login`, body, this.options)
+			.post(`${eventUrl}.process-speaker-login`, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}

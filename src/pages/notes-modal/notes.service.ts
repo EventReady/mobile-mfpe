@@ -33,11 +33,15 @@ export class NotesService {
 	**-------------------------------------------------------------------------------------
 	*/
 	saveNote(regId, note: string, noteId: number) {
-		let url = `${eventUrl}.save-note&eventId=${eventId}&note=${note}&noteId=${noteId}&item=${btoa(
+		let body: string = JSON.stringify({
+			eventId,
+			note,
+			noteId,
 			regId,
-		)}`;
+		});
+		let url = `${eventUrl}.save-note`;
 		return this.http
-			.get(url, this.options)
+			.post(url, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}
@@ -47,11 +51,15 @@ export class NotesService {
 	**-------------------------------------------------------------------------------------
 	*/
 	addNote(regId, note: string, noteType: string) {
-		let url = `${eventUrl}.add-notes&eventId=${eventId}&note=${note}&noteType=${noteType}&item=${btoa(
+		let body: string = JSON.stringify({
+			eventId,
+			note,
+			noteType,
 			regId,
-		)}`;
+		});
+		let url = `${eventUrl}.add-notes`;
 		return this.http
-			.get(url, this.options)
+			.post(url, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}

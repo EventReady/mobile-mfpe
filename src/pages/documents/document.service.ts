@@ -28,18 +28,18 @@ export class DocumentService {
 	constructor(private http: Http) {}
 	/*
 	**-------------------------------------------------------------------------------------
-	** METHOD NAME - getExhibitors
-	** DESC - This will get a list of exhibitors
+	** METHOD NAME - getFiles
 	**-------------------------------------------------------------------------------------
 	*/
 	getFiles(regid) {
+		let body: string = JSON.stringify({
+			regid,
+			eventId,
+			clientId,
+		});
+
 		return this.http
-			.get(
-				`${
-					this.url
-				}&clientId=${clientId}&eventId=${eventId}&item=${btoa(regid)}`,
-				this.options,
-			)
+			.post(`${this.url}`, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}
@@ -49,13 +49,16 @@ export class DocumentService {
 	**-------------------------------------------------------------------------------------
 	*/
 	setFavFile(regid, fileId, set) {
+		let body: string = JSON.stringify({
+			fileId,
+			regid,
+			eventId,
+			clientId,
+			set,
+			exhibId: fileId,
+		});
 		return this.http
-			.get(
-				`${eventUrl}.fav-file&fileid=${fileId}&clientId=${clientId}&eventId=${eventId}&item=${btoa(
-					regid,
-				)}&exhibId=${fileId}&set=${set}`,
-				this.options,
-			)
+			.post(`${eventUrl}.fav-file`, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}

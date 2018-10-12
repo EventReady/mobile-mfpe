@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.eventready.mfpeapp2018" version="1.0.9" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>2018 Educator Conference</name>
-    <description>2018 Educator Conference</description>
+<widget id="com.eventready.trxadeapp2018" version="0.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>TRXADE 2018</name>
+    <description>Event Ready</description>
     <author email="jg@jtmg.io" href="http://eventready.com/">Event Ready Team</author>
     <content src="index.html" />
     <access origin="*" />
@@ -11,14 +11,21 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
-    <preference name="ScrollEnabled" value="false" />
-    <preference name="android-minSdkVersion" value="19" />
+    <allow-navigation href="*" />
+    <preference name="webviewbounce" value="false" />
+    <preference name="UIWebViewBounce" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="android-minSdkVersion" value="16" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="SplashMaintainAspectRatio" value="true" />
-    <preference name="FadeSplashScreenDuration" value="300" />
-    <preference name="SplashShowOnlyFirstTime" value="false" />
+    <preference name="AutoHideSplashScreen" value="false" />
+    <preference name="SplashScreenDelay" value="10000" />
+    <preference name="FadeSplashScreenDuration" value="1000" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="ShowSplashScreen" value="true" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
+    <preference name="SplashShowOnlyFirstTime" value="false" />
+    <preference name="FadeSplashScreen" value="true" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -76,12 +83,14 @@
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
-    <plugin name="cordova-plugin-whitelist" spec="1.3.3" />
-    <plugin name="cordova-plugin-statusbar" spec="2.4.2" />
-    <plugin name="cordova-plugin-device" spec="2.0.2" />
-    <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
-    <plugin name="cordova-plugin-ionic-webview" spec="^2.0.0" />
-    <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
+    <plugin name="cordova-plugin-whitelist" spec="~1.3.3" />
+    <plugin name="cordova-plugin-statusbar" spec="~2.4.2" />
+    <plugin name="cordova-plugin-device" spec="~1.1.7" />
+    <plugin name="cordova-plugin-splashscreen" spec="~4.1.0" />
+    <plugin name="cordova-plugin-ionic-webview" spec="~2.2.0">
+        <variable name="ANDROID_SUPPORT_ANNOTATIONS_VERSION" value="27.+" />
+    </plugin>
+    <plugin name="cordova-plugin-ionic-keyboard" spec="~2.1.3" />
     <plugin name="cordova-plugin-inappbrowser" spec="~1.7.2" />
     <plugin name="cordova-plugin-email-composer" spec="~0.8.15" />
     <plugin name="cordova-plugin-google-analytics" spec="~1.8.6">
@@ -97,11 +106,12 @@
     <plugin name="cordova-plugin-geolocation" spec="~4.0.1">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
-    <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
+    <plugin name="cordova-plugin-app-version" spec="~0.1.9" />
     <plugin name="cordova-plugin-console" spec="~1.1.0" />
     <plugin name="cordova-plugin-file-opener2" spec="~2.0.19" />
-    <plugin name="cordova-sqlite-storage" spec="~2.3.3" />
-    <plugin name="cordova-plugin-market" spec="^1.2.0" />
+    <plugin name="cordova-sqlite-storage" spec="~2.4.0" />
+    <plugin name="cordova-plugin-market" spec="~1.2.0" />
+    <plugin name="ionic-plugin-keyboard" spec="~2.2.1" />
     <engine name="browser" spec="~5.0.4" />
     <engine name="android" spec="7.1.1" />
     <engine name="ios" spec="4.5.5" />

@@ -46,10 +46,10 @@ export class VenuesService {
 	** DESC - This will get a list of exhibitors
 	**-------------------------------------------------------------------------------------
 	*/
-	getVenue(venueId: number) {
+	getVenue(venueId: number = 0) {
 		return this.http
 			.get(
-				`${eventUrl}.venue&clientId=${clientId}&venueId=${venueId}`,
+				`${eventUrl}.venue&clientId=${clientId}&eventId=${eventId}&venueId=${venueId}`,
 				this.options,
 			)
 			.map(this.formatData)

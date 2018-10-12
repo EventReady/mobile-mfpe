@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { eventUrl, serverToken, eventId, clientId, database } from '@app/globals';
+import {
+	eventUrl,
+	serverToken,
+	eventId,
+	clientId,
+	database,
+} from '@app/globals';
 
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
@@ -27,13 +33,13 @@ export class ExhibitorService {
 	**-------------------------------------------------------------------------------------
 	*/
 	getExhibitors(regid) {
+		let body: string = JSON.stringify({
+			clientId,
+			eventId,
+			regid,
+		});
 		return this.http
-			.get(
-				`${
-					this.url
-				}&clientId=${clientId}&eventId=${eventId}&regid=${regid}`,
-				this.options,
-			)
+			.post(`${this.url}`, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}
@@ -44,13 +50,13 @@ export class ExhibitorService {
 	**-------------------------------------------------------------------------------------
 	*/
 	getMyExhibitors(regid) {
+		let body: string = JSON.stringify({
+			clientId,
+			eventId,
+			regid,
+		});
 		return this.http
-			.get(
-				`${eventUrl}.my-exhibitors&clientId=${clientId}&eventId=${eventId}&item=${btoa(
-					regid,
-				)}`,
-				this.options,
-			)
+			.post(`${eventUrl}.my-exhibitors`, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}
@@ -61,13 +67,15 @@ export class ExhibitorService {
 	**-------------------------------------------------------------------------------------
 	*/
 	setFavExhibitors(regid, exhibid, set) {
+		let body: string = JSON.stringify({
+			clientId,
+			eventId,
+			regid,
+			exhibid,
+			set,
+		});
 		return this.http
-			.get(
-				`${eventUrl}.fav-exhibitors&clientId=${clientId}&eventId=${eventId}&item=${btoa(
-					regid,
-				)}&exhibId=${exhibid}&set=${set}`,
-				this.options,
-			)
+			.post(`${eventUrl}.fav-exhibitors`, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}

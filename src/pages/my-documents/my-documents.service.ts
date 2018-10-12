@@ -32,13 +32,13 @@ export class MyDocumentsService {
 	**-------------------------------------------------------------------------------------
 	*/
 	getMyFiles(regid) {
+		let body: string = JSON.stringify({
+			clientId,
+			eventId,
+			regid,
+		});
 		return this.http
-			.get(
-				`${eventUrl}.my-files&clientId=${clientId}&eventId=${eventId}&item=${btoa(
-					regid,
-				)}`,
-				this.options,
-			)
+			.post(`${eventUrl}.my-files`, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}
@@ -48,11 +48,13 @@ export class MyDocumentsService {
 	**-------------------------------------------------------------------------------------
 	*/
 	sendFiles(regId): Observable<any> {
-		let url = `${eventUrl}.send-files&eventId=${eventId}&item=${btoa(
+		let body: string = JSON.stringify({
+			eventId,
 			regId,
-		)}`;
+		});
+		let url = `${eventUrl}.send-files`;
 		return this.http
-			.get(url, this.options)
+			.post(url, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}

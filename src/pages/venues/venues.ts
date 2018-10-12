@@ -10,18 +10,17 @@ import {
 } from 'ionic-angular';
 import { AppService } from '@app/app.service';
 import { ImageViewerController } from 'ionic-img-viewer';
-import { venueMaps } from '@app/dashboard.config';
-//import { VenuesService } from './venues.service';
+import { VenuesService } from './venues.service';
 
 @IonicPage()
 @Component({
 	selector: 'venues',
 	templateUrl: 'venues.html',
-	providers: [ImageViewerController],
+	providers: [ImageViewerController, VenuesService],
 })
 export class VenuesPage {
-	public loaded: boolean = true;
-	public venues: object;
+	public loaded: boolean = false;
+	public venue: any;
 	public loadingPopup;
 	public venueMaps = [];
 
@@ -39,8 +38,15 @@ export class VenuesPage {
 		public modalCtrl: ModalController,
 		private appService: AppService,
 		private _imageViewerCtrl: ImageViewerController,
+		private service: VenuesService,
 	) {
-		this.venueMaps = venueMaps;
+		this.loadingPopup = this.loadingCtrl.create({ spinner: 'crescent' });
+		this.loadingPopup.present();
+		this.service.getVenue().subscribe((response) => {
+			this.venue = response.data;
+			this.loadingPopup.dismiss();
+			this.loaded = true;
+		});
 	}
 	/*
 	**-------------------------------------------------------------------------------------

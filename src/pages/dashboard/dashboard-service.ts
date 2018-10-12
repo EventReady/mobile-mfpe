@@ -62,7 +62,7 @@ export class DashboardService {
 	*/
 	getDashboardConfig() {
 		return this.http
-			.get(`${this.url}.dashboard-json`, this.options)
+			.get(`${this.url}.dashboard-data`, this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}

@@ -32,9 +32,12 @@ export class MyScheduleService {
 	** DESC - This will get the schedule
 	**-------------------------------------------------------------------------------------
 	*/
-	getSchedule(reg_id): Observable<any> {
+	getSchedule(regId): Observable<any> {
+		let body: string = JSON.stringify({
+			regId,
+		});
 		return this.http
-			.get(`${this.schedule_url}&item=${btoa(reg_id)}`, this.options)
+			.post(`${this.schedule_url}`, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}
@@ -44,12 +47,15 @@ export class MyScheduleService {
 	** DESC - This will get the schedule
 	**-------------------------------------------------------------------------------------
 	*/
-	delete(id: number, reg_id): Observable<any> {
-		let url = `${eventUrl}.remove-schedule&id=${id}&eventId=${eventId}&item=${btoa(
-			reg_id,
-		)}`;
+	delete(id: number, regId): Observable<any> {
+		let body: string = JSON.stringify({
+			regId,
+			id,
+			eventId,
+		});
+		let url = `${eventUrl}.remove-schedule`;
 		return this.http
-			.get(url, this.options)
+			.post(url, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}

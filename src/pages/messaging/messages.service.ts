@@ -35,11 +35,14 @@ export class MessagesService {
 	**-------------------------------------------------------------------------------------
 	*/
 	deleteMessage(messageId) {
+		let body: string = JSON.stringify({
+			clientId,
+			eventId,
+			messageId,
+		});
+
 		return this.http
-			.get(
-				`${eventUrl}.delete-message&messageid=${messageId}&clientId=${clientId}&eventId=${eventId}`,
-				this.options,
-			)
+			.post(`${eventUrl}.delete-message`, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}
@@ -63,13 +66,13 @@ export class MessagesService {
 	**-------------------------------------------------------------------------------------
 	*/
 	getMessages(regid) {
+		let body: string = JSON.stringify({
+			clientId,
+			eventId,
+			regid,
+		});
 		return this.http
-			.get(
-				`${eventUrl}.get-messages&clientId=${clientId}&eventId=${eventId}&item=${btoa(
-					regid,
-				)}`,
-				this.options,
-			)
+			.post(`${eventUrl}.get-messages`, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}
@@ -79,13 +82,14 @@ export class MessagesService {
 	**-------------------------------------------------------------------------------------
 	*/
 	getMessage(regid, messageId) {
+		let body: string = JSON.stringify({
+			clientId,
+			eventId,
+			regid,
+			messageId,
+		});
 		return this.http
-			.get(
-				`${eventUrl}.get-message&clientId=${clientId}&eventId=${eventId}&item=${btoa(
-					regid,
-				)}&messageId=${messageId}`,
-				this.options,
-			)
+			.post(`${eventUrl}.get-message`, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}
@@ -95,13 +99,16 @@ export class MessagesService {
 	**-------------------------------------------------------------------------------------
 	*/
 	saveMessage(subject, message, regid, contactid) {
+		let body: string = JSON.stringify({
+			subject,
+			contactid,
+			message,
+			clientId,
+			regid,
+			eventId,
+		});
 		return this.http
-			.get(
-				`${eventUrl}.save-message&contact=${contactid}&subject=${subject}&message=${message}&clientId=${clientId}&eventId=${eventId}&item=${btoa(
-					regid,
-				)}`,
-				this.options,
-			)
+			.post(`${eventUrl}.save-message`, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}
@@ -111,13 +118,15 @@ export class MessagesService {
 	**-------------------------------------------------------------------------------------
 	*/
 	saveResponse(message, regid, messageId) {
+		let body: string = JSON.stringify({
+			message,
+			messageId,
+			clientId,
+			eventId,
+			regid,
+		});
 		return this.http
-			.get(
-				`${eventUrl}.save-response&message=${message}&messageId=${messageId}&clientId=${clientId}&eventId=${eventId}&item=${btoa(
-					regid,
-				)}`,
-				this.options,
-			)
+			.post(`${eventUrl}.save-response`, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}
@@ -127,13 +136,14 @@ export class MessagesService {
 	**-------------------------------------------------------------------------------------
 	*/
 	sendHelpMessage(message, regid) {
+		let body: string = JSON.stringify({
+			message,
+			clientId,
+			eventId,
+			regid,
+		});
 		return this.http
-			.get(
-				`${eventUrl}.send-help-message&message=${message}&clientId=${clientId}&eventId=${eventId}&item=${btoa(
-					regid,
-				)}`,
-				this.options,
-			)
+			.post(`${eventUrl}.send-help-message`, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}
@@ -143,13 +153,15 @@ export class MessagesService {
 	**-------------------------------------------------------------------------------------
 	*/
 	sendShareMessage(email, message, regid) {
+		let body: string = JSON.stringify({
+			email,
+			message,
+			clientId,
+			eventId,
+			regid,
+		});
 		return this.http
-			.get(
-				`${eventUrl}.send-share-message&email=${email}&message=${message}&clientId=${clientId}&eventId=${eventId}&item=${btoa(
-					regid,
-				)}`,
-				this.options,
-			)
+			.post(`${eventUrl}.send-share-message`, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}

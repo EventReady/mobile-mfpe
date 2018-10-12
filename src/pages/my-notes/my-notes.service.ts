@@ -26,10 +26,13 @@ export class MyNotesService {
 	** DESC - This will get the notes
 	**-------------------------------------------------------------------------------------
 	*/
-	getNotes(reg_id): Observable<any> {
-		this.schedule_url = `${this.schedule_url}&item=${btoa(reg_id)}`;
+	getNotes(regId): Observable<any> {
+		let body: string = JSON.stringify({
+			regId,
+		});
+		this.schedule_url = `${this.schedule_url}`;
 		return this.http
-			.get(this.schedule_url, this.options)
+			.post(this.schedule_url, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}
@@ -40,11 +43,13 @@ export class MyNotesService {
 	**-------------------------------------------------------------------------------------
 	*/
 	sendNotes(regId): Observable<any> {
-		let url = `${eventUrl}.send-notes&eventId=${eventId}&item=${btoa(
+		let body: string = JSON.stringify({
+			eventId,
 			regId,
-		)}`;
+		});
+		let url = `${eventUrl}.send-notes`;
 		return this.http
-			.get(url, this.options)
+			.post(url, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}
@@ -55,12 +60,14 @@ export class MyNotesService {
 	**-------------------------------------------------------------------------------------
 	*/
 	deleteNote(noteId, regId): Observable<any> {
-		let url = `${eventUrl}.delete-note&eventId=${eventId}&noteid=${noteId}&item=${btoa(
+		let body: string = JSON.stringify({
+			eventId,
+			noteId,
 			regId,
-		)}`;
-		console.log(url);
+		});
+		let url = `${eventUrl}.delete-note`;
 		return this.http
-			.get(url, this.options)
+			.post(url, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}

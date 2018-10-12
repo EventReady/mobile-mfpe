@@ -27,12 +27,6 @@ import {
 } from '@app/globals';
 import { DashboardService } from './dashboard-service';
 import { ImageViewerController } from 'ionic-img-viewer';
-import {
-	attendeeMenu,
-	speakerMenu,
-	banners,
-	venueMaps,
-} from '@app/dashboard.config';
 @IonicPage()
 @Component({
 	selector: 'dashboard',
@@ -83,10 +77,6 @@ export class DashboardPage {
 		private service: DashboardService,
 		private _imageViewerCtrl: ImageViewerController,
 	) {
-		this.attendeeMenu = attendeeMenu;
-		this.speakerMenu = speakerMenu;
-		this.banners = banners;
-		this.venueMaps = venueMaps;
 		this.appService.getIsSpeaker().then((isSpeaker) => {
 			this.isSpeaker = isSpeaker;
 		});

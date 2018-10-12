@@ -49,11 +49,15 @@ export class ScheduleDetailService {
 	**-------------------------------------------------------------------------------------
 	*/
 	addtoSchedule(scheduleId: number, regId) {
-		let url = `${eventUrl}.add-schedule&item=${btoa(
+		let body: string = JSON.stringify({
 			regId,
-		)}&locationId=${locationId}&scheduleId=${scheduleId}&eventId=${eventId}`;
+			locationId,
+			scheduleId,
+			eventId,
+		});
+		let url = `${eventUrl}.add-schedule`;
 		return this.http
-			.get(url, this.options)
+			.post(url, btoa(body), this.options)
 			.map(this.formatData)
 			.catch(this.throwError);
 	}

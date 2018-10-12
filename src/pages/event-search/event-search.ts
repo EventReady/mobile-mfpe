@@ -4,7 +4,6 @@ import {
 	NavController,
 	LoadingController,
 	ViewController,
-	NavParams,
 } from 'ionic-angular';
 import { AppService } from '@app/app.service';
 import { EventSearchService } from './event-search.service';
@@ -29,7 +28,6 @@ export class EventSearchPage {
 		public navCtrl: NavController,
 		private appService: AppService,
 		private service: EventSearchService,
-		private navParams: NavParams,
 	) {}
 
 	/*
